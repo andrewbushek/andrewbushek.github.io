@@ -43,21 +43,88 @@
   .stats span{font-size:14px;color:var(--muted)}
   @media (max-width:900px){.stats{grid-template-columns:repeat(2,1fr);gap:20px}}
 
-  .pipe{display:grid;grid-template-columns:1fr auto 1fr auto 1.4fr;gap:14px;align-items:stretch;margin:0 0 40px}
-  .stage{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-  .stage h4{margin:0 0 10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-  .chips{display:flex;flex-wrap:wrap;gap:6px}
-  .chip{font-size:13px;padding:4px 10px;border-radius:999px;background:#eef2ec;color:var(--ink)}
-  .stage.core{background:var(--ink);border-color:var(--ink)}
-  .stage.core h4{color:var(--gold)}
-  .stage.core .chip{background:rgba(255,255,255,.12);color:#fff}
-  .arrow{align-self:center;color:var(--muted);font-size:22px}
-  .auto{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-  .auto article{border-top:2px solid var(--ink);padding-top:14px}
-  .auto h3{font-family:Fraunces,serif;font-weight:600;font-size:19px;margin:0 0 6px}
-  .auto p{margin:0;color:var(--ink-2);font-size:15px}
-  .auto .res{display:block;margin-top:8px;font-size:13.5px;color:var(--accent);font-weight:500}
-  @media (max-width:900px){.pipe{grid-template-columns:1fr}.arrow{transform:rotate(90deg);justify-self:center}.auto{grid-template-columns:1fr}}
+  .flow{display:flex;align-items:center;gap:0;margin:0 0 36px}
+  .node{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .node small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:4px}
+  .node b{font-weight:500;font-size:14px}
+  .node.core{background:var(--ink);color:#fff;border-color:var(--ink)} .node.core small{color:var(--gold)}
+  .wire{position:relative;width:56px;height:2px;background:var(--line);overflow:hidden;flex:none}
+  .wire i{position:absolute;top:-2px;width:6px;height:6px;border-radius:50%;background:var(--accent);animation:flow 2.4s linear infinite}
+  .wire i:nth-child(2){animation-delay:.8s}.wire i:nth-child(3){animation-delay:1.6s}
+  @keyframes flow{from{left:-6px}to{left:56px}}
+  @media (prefers-reduced-motion:reduce){.wire i{animation:none;left:25px}}
+
+  .sys{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+  .sx{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 22px}
+  .sx h3{font-family:Fraunces,serif;font-weight:600;font-size:20px;margin:16px 4px 6px}
+  .sx p{margin:0 4px;color:var(--ink-2);font-size:14.5px}
+  .sx .res{display:inline-block;margin:10px 4px 0;font-size:13px;font-weight:600;color:var(--accent);background:#eef2ec;padding:4px 10px;border-radius:999px}
+  .viz{background:#f7f8f5;border:1px solid var(--line);border-radius:10px;padding:16px;min-height:236px;font-size:12.5px;display:flex;flex-direction:column}
+  .vlabel{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:12px}
+  .chips span{font-size:11.5px;padding:3px 9px;border-radius:999px;background:#e9ece6;color:var(--ink-2)}
+  .chips .ok{background:#e1efe6;color:#245a3f}.chips .warn{background:#f6ead3;color:#87591a}
+  .chips .btn-mini{margin-left:auto;background:var(--ink);color:#fff;font-weight:600}
+
+  .txn{display:flex;justify-content:space-between;background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:9px 12px}
+  .txn b{color:var(--accent)}
+  .cand{display:grid;grid-template-columns:1fr auto 70px 34px;gap:10px;align-items:center;padding:7px 10px;border-radius:8px;color:var(--muted)}
+  .cand.best{background:#fff;border:1px solid #bcd8c6;color:var(--ink)}
+  .cand .amt{font-variant-numeric:tabular-nums}
+  .score{height:6px;background:#e5e8e2;border-radius:3px;overflow:hidden}.score em{display:block;height:100%;background:#b9c4bd}
+  .cand.best .score em{background:var(--accent)} .pct{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+
+  .steps{display:flex;gap:4px}
+  .steps span{flex:1;min-width:58px;text-align:center;font-size:10.5px;padding:6px 2px;border-radius:6px;background:#e9ece6;color:var(--muted)}
+  .steps .done{background:#d7e7dc;color:#245a3f}.steps .now{background:var(--gold);color:#fff;font-weight:600}
+  table.mini{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  .mini td{padding:7px 4px;border-bottom:1px solid var(--line);white-space:nowrap}
+  .mini td small{color:var(--muted);margin-left:3px}
+  .mini td:nth-child(3){text-align:right;font-weight:600}.mini td:last-child{text-align:right}
+  .att{display:inline-block;width:56px;height:6px;background:#e5e8e2;border-radius:3px;overflow:hidden;vertical-align:middle;margin-right:4px}
+  .att em{display:block;height:100%;max-width:100%;background:var(--accent)}
+  .pill{font-size:10.5px;padding:2px 8px;border-radius:999px}.pill.g{background:#e1efe6;color:#245a3f}.pill.a{background:#f6ead3;color:#87591a}
+
+  .cons{display:flex;align-items:flex-end;gap:6px;height:150px}
+  .ent{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;text-align:center}
+  .ent .bar{width:100%;max-width:46px;background:#9cb8a8;border-radius:4px 4px 0 0}
+  .ent span{font-size:10.5px;color:var(--muted);margin-top:5px;white-space:nowrap}.ent b{font-size:12px}
+  .ent.elim .bar{background:repeating-linear-gradient(45deg,#e3b9a8,#e3b9a8 4px,#f2d8cd 4px,#f2d8cd 8px)}.ent.elim b{color:#a4492b}
+  .ent.tot .bar{background:var(--ink)}
+  .op{color:var(--muted);font-weight:600;padding-bottom:34px}
+
+  svg.close,svg.wf{width:100%;height:auto;display:block;font-family:Inter,sans-serif}
+  .close .grid line{stroke:#e2e6df}.close .ax{font-size:10px;fill:var(--muted)}.close .strong{fill:var(--ink);font-weight:600}
+  .close .bd3{stroke:var(--gold);stroke-dasharray:3 3}
+  .close polyline{fill:none;stroke-width:2.5;stroke-linejoin:round}
+  .close .before{stroke:#c3cbc5;stroke-dasharray:5 4}.close .now{stroke:var(--accent)}
+  .close .dotnow{fill:var(--accent)}.close .dotbefore{fill:#aab3ad}
+  .close .lab{font-size:11.5px;font-weight:600}.close .now-t{fill:var(--accent)}.close .before-t{fill:#8a948e}
+  .wf .base{fill:var(--ink)}.wf .up{fill:#5f9b78}.wf .dn{fill:#d38c70}
+  .wf .conn{stroke:#b9c1bb;stroke-dasharray:2 2}.wf .base-l{stroke:#cfd5cd}
+  .wf .v{font-size:11px;font-weight:600;fill:var(--ink)}.wf .n{font-size:10px;fill:var(--muted)}
+
+  .tx{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+  .tx p{margin:4px 0;font-size:12.5px;color:var(--ink-2)}
+  mark{padding:1px 3px;border-radius:3px}mark.g{background:#d6ecdc}mark.a{background:#f6e2bd}mark.n{background:#e4e8f0}
+  .sent{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:12px;color:var(--muted)}
+  .gauge{position:relative;flex:1;height:8px;border-radius:4px;background:linear-gradient(90deg,#d38c70,#e9e2c9 50%,#5f9b78)}
+  .gauge em{position:absolute;top:-4px;width:4px;height:16px;border-radius:2px;background:var(--ink);transform:translateX(-50%)}
+  .sent b{color:var(--accent)}
+
+  @media (max-width:900px){.sys{grid-template-columns:1fr}.flow{flex-direction:column;align-items:stretch}.wire{width:2px;height:28px;align-self:center}.wire i{left:-2px;animation-name:flowv}}
+
+  .sys>*{min-width:0}.viz{overflow:hidden}
+  @media (max-width:520px){
+    .viz{padding:12px;font-size:11.5px}
+    .txn{font-size:11px}.txn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:8px}
+    .cand{grid-template-columns:1fr auto 30px;gap:6px;padding:6px 8px}.cand .score{display:none}
+    .steps span{min-width:0;font-size:9.5px;padding:5px 1px}
+    .att{display:none}.mini td{padding:6px 2px}.pill{font-size:9.5px;padding:2px 6px}
+    .chips .btn-mini{margin-left:0}
+    .ent span{font-size:9px}.op{padding-bottom:30px}
+  }
+  @keyframes flowv{from{top:-6px}to{top:28px}}
   section{padding:72px 0}
   h2{font-family:Fraunces,serif;font-weight:400;font-size:32px;letter-spacing:-.015em;margin:0 0 8px}
   .sub{color:var(--muted);margin:0 0 40px}
@@ -200,23 +267,143 @@
 
   <section id="systems" style="border-top:1px solid var(--line)">
     <h2>Under the hood</h2>
-    <p class="sub">The automations behind the dashboards: what runs every day so a one-person finance team can close in two days.</p>
+    <p class="sub">What runs every day so a one-person finance team can close in two days. Every name and number below is fictional; the mechanics are real.</p>
 
-    <div class="pipe" aria-label="Data flow from source systems into BigQuery and out to automations">
-      <div class="stage"><h4>Sources</h4><div class="chips"><span class="chip">QuickBooks</span><span class="chip">Stripe</span><span class="chip">HubSpot</span><span class="chip">Mercury</span><span class="chip">Gong</span></div></div>
-      <div class="arrow">→</div>
-      <div class="stage core"><h4>Warehouse</h4><div class="chips"><span class="chip">BigQuery</span><span class="chip">dbt</span><span class="chip">Python</span></div></div>
-      <div class="arrow">→</div>
-      <div class="stage"><h4>Automations</h4><div class="chips"><span class="chip">Cash matching</span><span class="chip">Commissions</span><span class="chip">Consolidation</span><span class="chip">Close</span><span class="chip">Revenue analytics</span><span class="chip">Call signals</span></div></div>
+    <div class="flow" aria-label="Data flows from source systems into the warehouse and out to automations">
+      <div class="node"><small>Sources</small><b>QuickBooks · Stripe · HubSpot · Mercury · Gong</b></div>
+      <div class="wire"><i></i><i></i><i></i></div>
+      <div class="node core"><small>Warehouse</small><b>BigQuery · dbt · Python</b></div>
+      <div class="wire"><i></i><i></i><i></i></div>
+      <div class="node"><small>Automations</small><b>6 jobs, daily</b></div>
     </div>
 
-    <div class="auto">
-      <article><h3>Cash matching</h3><p>Bank receipts are matched against open invoices and scored by amount, payer, and timing. Confident matches queue for one-click approval; exceptions go to review. Nothing posts without a person signing off.</p></article>
-      <article><h3>Commissions</h3><p>Payouts calculated straight from CRM and billing data, with twice-monthly approval routing to managers. Built once before at TradeCentric across five comp plans.</p><span class="res">Five days of processing → same day</span></article>
-      <article><h3>Multi-entity consolidation</h3><p>QuickBooks, Stripe, HubSpot, and Mercury land in BigQuery and roll up across three legal entities into reconciled reporting packs, with no spreadsheet stitching.</p></article>
-      <article><h3>Close automation</h3><p>Recurring journal entries, accruals, and reconciliations prepared from the warehouse so the close runs in-house on a fixed calendar.</p><span class="res">Median JE posting 11–15 days → 2; 96% booked by day 3</span></article>
-      <article><h3>Revenue analytics</h3><p>ARR, retention, and cohort views rebuilt from billing and CRM data, so board numbers tie back to source transactions.</p></article>
-      <article><h3>Call signals</h3><p>Sales call transcripts scored for sentiment and buying signals in dbt, then written back to the CRM so pipeline reviews start from evidence.</p></article>
+    <div class="sys">
+
+      <!-- 1. CASH MATCHING -->
+      <article class="sx">
+        <div class="viz">
+          <div class="vlabel">Mercury · incoming ACH</div>
+          <div class="txn"><span>NORTHWIND LOGISTICS · Oct 14</span><b>+$18,450.00</b></div>
+          <div class="vlabel" style="margin-top:12px">Open invoices, scored</div>
+          <div class="cand best"><span><b>INV-1042</b> Northwind Logistics · Oct 1</span><span class="amt">$18,450</span><span class="score"><em style="width:98%"></em></span><span class="pct">98%</span></div>
+          <div class="cand"><span><b>INV-1037</b> Northwind Logistics · Sep 2</span><span class="amt">$9,225</span><span class="score"><em style="width:41%"></em></span><span class="pct">41%</span></div>
+          <div class="cand"><span><b>INV-1051</b> Nordwind GmbH · Oct 9</span><span class="amt">$18,450</span><span class="score"><em style="width:22%"></em></span><span class="pct">22%</span></div>
+          <div class="chips"><span class="ok">amount ✓</span><span class="ok">payer ✓</span><span class="ok">timing ✓</span><span class="btn-mini">Approve match</span></div>
+        </div>
+        <h3>Cash matching</h3>
+        <p>Every bank receipt is scored against open invoices on amount, payer name, and timing. The confident ones queue for one-tap approval; the look-alikes go to review. Nothing posts on its own.</p>
+      </article>
+
+      <!-- 2. COMMISSIONS -->
+      <article class="sx">
+        <div class="viz">
+          <div class="steps"><span class="done">Closed-won</span><span class="done">Cash collected</span><span class="done">Calculated</span><span class="now">Manager</span><span>Finance</span><span>Payroll</span></div>
+          <div class="vlabel" style="margin-top:14px">Payout cycle · Oct 1–15</div>
+          <table class="mini">
+            <tr><td>J. Rivera <small>AE</small></td><td><span class="att"><em style="width:112%"></em></span> 112%</td><td>$6,840</td><td><span class="pill g">Approved</span></td></tr>
+            <tr><td>M. Chen <small>AE</small></td><td><span class="att"><em style="width:87%"></em></span> 87%</td><td>$4,215</td><td><span class="pill a">Manager</span></td></tr>
+            <tr><td>S. Patel <small>BDR</small></td><td><span class="att"><em style="width:95%"></em></span> 95%</td><td>$1,960</td><td><span class="pill a">Manager</span></td></tr>
+          </table>
+        </div>
+        <h3>Commissions</h3>
+        <p>Payouts calculate straight from CRM deals and collected cash, then route to each manager and finance twice a month. No spreadsheet, no end-of-month scramble.</p>
+        <span class="res">Five days of processing → same day</span>
+      </article>
+
+      <!-- 3. CONSOLIDATION -->
+      <article class="sx">
+        <div class="viz">
+          <div class="vlabel">October revenue by entity ($K)</div>
+          <div class="cons">
+            <div class="ent"><div class="bar" style="height:78%"></div><span>Cedar US</span><b>412</b></div>
+            <div class="op">+</div>
+            <div class="ent"><div class="bar" style="height:30%"></div><span>Cedar UK</span><b>158</b></div>
+            <div class="op">+</div>
+            <div class="ent"><div class="bar" style="height:16%"></div><span>Holdings</span><b>84</b></div>
+            <div class="op">−</div>
+            <div class="ent elim"><div class="bar" style="height:12%"></div><span>Interco</span><b>(64)</b></div>
+            <div class="op">=</div>
+            <div class="ent tot"><div class="bar" style="height:100%"></div><span>Consolidated</span><b>590</b></div>
+          </div>
+          <div class="chips"><span class="ok">ties to GL ✓</span><span class="ok">bank reconciled ✓</span><span class="ok">FX applied ✓</span></div>
+        </div>
+        <h3>Multi-entity consolidation</h3>
+        <p>Four source systems roll up across three legal entities. Intercompany eliminations and FX are applied automatically, and the reporting pack only publishes once it reconciles.</p>
+      </article>
+
+      <!-- 4. CLOSE -->
+      <article class="sx">
+        <div class="viz">
+          <div class="vlabel">Share of journal entries booked, by business day</div>
+          <svg class="close" viewBox="0 0 420 170" role="img" aria-label="Before: almost nothing booked by day 3. Now: 96 percent booked by day 3.">
+            <g class="grid"><line x1="40" y1="20" x2="410" y2="20"/><line x1="40" y1="75" x2="410" y2="75"/><line x1="40" y1="130" x2="410" y2="130"/></g>
+            <text x="34" y="24" class="ax" text-anchor="end">100%</text><text x="34" y="79" class="ax" text-anchor="end">50%</text><text x="34" y="134" class="ax" text-anchor="end">0%</text>
+            <line x1="114" y1="14" x2="114" y2="134" class="bd3"/><text x="118" y="14" class="ax strong">day 3</text>
+            <polyline class="before" points="40,130 77,130 114,124 151,118 188,108 225,92 262,74 299,58 336,42 373,30 410,22"/>
+            <polyline class="now" points="40,130 77,48 114,24 151,21 188,20 225,20 262,20 299,20 336,20 373,20 410,20"/>
+            <circle cx="114" cy="24" r="4.5" class="dotnow"/><circle cx="114" cy="124" r="4" class="dotbefore"/>
+            <text x="124" y="40" class="lab now-t">Now · 96%</text><text x="124" y="118" class="lab before-t">Outsourced · 0–7%</text>
+            <g class="ax"><text x="40" y="152">1</text><text x="114" y="152">3</text><text x="188" y="152">5</text><text x="262" y="152">7</text><text x="336" y="152">9</text><text x="404" y="152">11</text></g>
+          </svg>
+        </div>
+        <h3>Close automation</h3>
+        <p>Recurring entries, accruals, and reconciliations are prepared from the warehouse, so the close runs in-house on a fixed calendar instead of waiting on an outside firm.</p>
+        <span class="res">Median entry posting 11–15 days → 2</span>
+      </article>
+
+      <!-- 5. REVENUE -->
+      <article class="sx">
+        <div class="viz">
+          <div class="vlabel">ARR bridge · Q3 ($M)</div>
+          
+          <svg class="wf" viewBox="0 0 420 165" role="img" aria-label="ARR bridge from 4.20 to 4.71 million, fictional">
+<line x1="10" y1="130" x2="410" y2="130" class="base-l"/>
+<rect x="20" y="95.7" width="46" height="34.3" rx="3" class="base"/>
+<text x="43" y="89.7" text-anchor="middle" class="v">4.20</text>
+<text x="43" y="147" text-anchor="middle" class="n">Start</text>
+<line x1="66" y1="95.7" x2="86" y2="95.7" class="conn"/>
+<rect x="86" y="43.4" width="46" height="52.3" rx="3" class="up"/>
+<text x="109" y="37.4" text-anchor="middle" class="v">+0.61</text>
+<text x="109" y="147" text-anchor="middle" class="n">New</text>
+<line x1="132" y1="43.4" x2="152" y2="43.4" class="conn"/>
+<rect x="152" y="22.9" width="46" height="20.6" rx="3" class="up"/>
+<text x="175" y="16.9" text-anchor="middle" class="v">+0.24</text>
+<text x="175" y="147" text-anchor="middle" class="n">Expand</text>
+<line x1="198" y1="22.9" x2="218" y2="22.9" class="conn"/>
+<rect x="218" y="22.9" width="46" height="7.7" rx="3" class="dn"/>
+<text x="241" y="16.9" text-anchor="middle" class="v">−0.09</text>
+<text x="241" y="147" text-anchor="middle" class="n">Contract</text>
+<line x1="264" y1="30.6" x2="284" y2="30.6" class="conn"/>
+<rect x="284" y="30.6" width="46" height="21.4" rx="3" class="dn"/>
+<text x="307" y="24.6" text-anchor="middle" class="v">−0.25</text>
+<text x="307" y="147" text-anchor="middle" class="n">Churn</text>
+<line x1="330" y1="52.0" x2="350" y2="52.0" class="conn"/>
+<rect x="350" y="52.0" width="46" height="78.0" rx="3" class="base"/>
+<text x="373" y="46.0" text-anchor="middle" class="v">4.71</text>
+<text x="373" y="147" text-anchor="middle" class="n">End</text>
+<text x="410" y="162" text-anchor="end" class="n">axis starts at $3.8M</text></svg>
+          <div class="chips"><span>NRR 103%</span><span>GRR 92%</span><span class="ok">every $ traces to Stripe ✓</span></div>
+        </div>
+        <h3>Revenue analytics</h3>
+        <p>ARR, retention, and cohorts rebuilt from billing and CRM data in dbt, so any number on a board slide can be traced back to the invoices behind it.</p>
+      </article>
+
+      <!-- 6. CALL SIGNALS -->
+      <article class="sx">
+        <div class="viz">
+          <div class="vlabel">Discovery call · Acme Health · 32 min</div>
+          <div class="tx">
+            <p><b>Buyer:</b> Honestly, <mark class="g">budget is already approved for Q1</mark>.</p>
+            <p><b>Buyer:</b> <mark class="a">We'd need SSO before any rollout</mark>, that's non-negotiable.</p>
+            <p><b>Buyer:</b> <mark class="n">Who else our size is using this?</mark></p>
+          </div>
+          <div class="sent"><span>Sentiment</span><span class="gauge"><em style="left:81%"></em></span><b>+0.62</b></div>
+          <div class="chips"><span class="ok">→ CRM: budget confirmed</span><span class="warn">→ CRM: security requirement</span></div>
+        </div>
+        <h3>Call signals</h3>
+        <p>Sales-call transcripts are scored for sentiment and buying signals in dbt, then written back to the deal in the CRM, so pipeline reviews start from what customers actually said.</p>
+      </article>
+
     </div>
   </section>
 
