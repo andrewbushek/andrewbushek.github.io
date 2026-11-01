@@ -145,12 +145,13 @@
   h2{font-family:Fraunces,serif;font-weight:400;font-size:32px;letter-spacing:-.015em;margin:0 0 8px}
   .sub{color:var(--muted);margin:0 0 40px}
 
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;align-items:start}
-  .card{background:var(--well);border:1px solid #d5e0d6;border-radius:18px;display:flex;flex-direction:column;padding:14px 14px 0;box-shadow:0 1px 2px rgba(22,48,43,.04);transition:box-shadow .2s, transform .2s}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:stretch}
+  .card{background:var(--well);border:1px solid #d5e0d6;border-radius:18px;display:flex;flex-direction:column;height:100%;padding:14px 14px 0;box-shadow:0 1px 2px rgba(22,48,43,.04);transition:box-shadow .2s, transform .2s}
   .card:hover{box-shadow:0 12px 32px rgba(22,48,43,.08);transform:translateY(-2px)}
-  .shot{background:transparent}
-  .shot img{width:100%;height:auto;display:block;border-radius:10px;background:#fff;border:1px solid rgba(22,48,43,.06);box-shadow:0 14px 32px rgba(22,48,43,.14),0 2px 6px rgba(22,48,43,.06)}
-  .body{background:#fff;margin:16px -14px 0;padding:18px 22px 20px;border-radius:0 0 17px 17px;border-top:1px solid rgba(22,48,43,.06);display:flex;flex-direction:column;flex:1}
+  .shot{aspect-ratio:23/10;overflow:hidden;border-radius:10px;background:#fff;border:1px solid rgba(22,48,43,.06);box-shadow:0 14px 32px rgba(22,48,43,.14),0 2px 6px rgba(22,48,43,.06);flex:none}
+  .shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+  .shot img.focus-lower{object-position:center 65%}
+  .body{background:#fff;margin:16px -14px 0;padding:18px 22px 20px;border-radius:0 0 17px 17px;border-top:1px solid rgba(22,48,43,.06);display:flex;flex-direction:column;flex:1 1 auto}
   .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600}
   .card h3{font-family:Fraunces,serif;font-weight:600;font-size:22px;margin:6px 0 8px;letter-spacing:-.015em}
   .q{color:var(--ink-2);margin:0 0 14px}
@@ -196,12 +197,14 @@
   .term .v{color:#f4faf6;text-align:right}
   .term .dim{color:#9eb0a8}
 
-  @media (min-width:760px){
+  @media (min-width:761px){
     nav{white-space:nowrap}
     header.top{align-items:baseline}
+    .card{min-height:584px}
   }
   @media (max-width:760px){
-    .grid{grid-template-columns:1fr}
+    .grid{grid-template-columns:1fr;align-items:start}
+    .card{height:auto}
     .about{grid-template-columns:1fr;gap:32px}
     .hero{padding:28px 0 0}
     section{padding:48px 0}
@@ -292,7 +295,7 @@
       </article>
 
       <article class="card">
-        <div class="shot"><img src="img/household-desktop.png" alt="Household overview with shared spending, what is left in the monthly plan, and the balance between two people. Fictional household." width="1168" height="664" loading="lazy"></div>
+        <div class="shot"><img class="focus-lower" src="img/household-desktop.png" alt="Household overview with shared spending, what is left in the monthly plan, and the balance between two people. Fictional household." width="1168" height="664" loading="lazy"></div>
         <div class="body">
           <span class="tag">Live demo</span>
           <h3>Household finance</h3>
