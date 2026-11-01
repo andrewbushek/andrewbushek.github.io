@@ -3,18 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Andrew Bushek · Finance &amp; the tools behind it</title>
-<meta name="description" content="Andrew Bushek, VP of Finance at Haystack. A finance leader who builds his own tools: cash forecasting, AR, unit economics, and planning.">
-<meta property="og:title" content="Andrew Bushek · Finance & the tools behind it">
-<meta property="og:description" content="Finance leader who builds his own tools.">
-<meta property="og:image" content="https://andrewbushek.github.io/img/cash-report.png">
+<title>Andrew Bushek · VP of Finance at Haystack</title>
+<meta name="description" content="VP of Finance at Haystack. I run a one-person finance team on software I built for cash, AR, commissions, the close, and revenue.">
+<link rel="canonical" href="https://andrewbushek.github.io/">
+<meta property="og:url" content="https://andrewbushek.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Andrew Bushek · VP of Finance at Haystack">
+<meta property="og:description" content="VP of Finance at Haystack. I run a one-person finance team on software I built for cash, AR, commissions, the close, and revenue.">
+<meta property="og:image" content="https://andrewbushek.github.io/img/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Andrew Bushek, VP of Finance at Haystack, beside a cash reporting dashboard.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Andrew Bushek · VP of Finance at Haystack">
+<meta name="twitter:description" content="VP of Finance at Haystack. I run a one-person finance team on software I built for cash, AR, commissions, the close, and revenue.">
+<meta name="twitter:image" content="https://andrewbushek.github.io/img/share-card.png">
+<meta name="twitter:image:alt" content="Andrew Bushek, VP of Finance at Haystack, beside a cash reporting dashboard.">
+<link rel="icon" href="/img/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#16302b; --ink-2:#3d524d; --muted:#6b7c77; --line:#dfe4de;
-    --bg:#f5f4ef; --card:#ffffff; --accent:#2f6b4f; --gold:#c8963e;
+    --ink:#16302b; --ink-2:#3d524d; --muted:#6b7c77; --line:#dddcd4;
+    --bg:#f4f2ec; --card:#ffffff; --accent:#2a6848; --gold:#8d6d32;
+    --well:#e5eee4;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -22,26 +35,29 @@
   a{color:inherit}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
-  header.top{display:flex;justify-content:space-between;align-items:center;padding:28px 0}
-  .mark{font-family:Fraunces,serif;font-weight:600;font-size:20px;text-decoration:none;letter-spacing:-.01em}
-  .mark span{color:var(--gold)}
-  nav a{margin-left:22px;text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:500}
+  header.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:26px 0 8px}
+  .mark{font-family:Fraunces,serif;font-weight:600;font-size:20px;text-decoration:none;letter-spacing:-.01em;flex:none;padding-top:1px}
+  nav{flex:1;min-width:0;text-align:right;font-size:14px;line-height:1.45}
+  nav a{display:inline-block;text-decoration:none;color:var(--ink-2);font-weight:500}
   nav a:hover{color:var(--ink)}
+  nav .sep{display:inline-block;color:var(--muted);margin:0 .35em}
+  a:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-  .hero{padding:72px 0 64px;border-bottom:1px solid var(--line)}
-  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 18px}
-  h1{font-family:Fraunces,serif;font-weight:400;font-size:clamp(36px,6vw,64px);line-height:1.05;letter-spacing:-.025em;margin:0 0 24px;max-width:15ch}
-  h1 em{font-style:italic;color:var(--accent)}
-  .lede{font-size:19px;color:var(--ink-2);max-width:60ch;margin:0 0 32px}
-  .cta{display:flex;gap:12px;flex-wrap:wrap}
-  .btn{display:inline-block;padding:11px 18px;border-radius:8px;text-decoration:none;font-weight:500;font-size:15px;border:1px solid var(--ink)}
+  .hero{padding:56px 0 8px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 18px}
+  h1{font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4.7vw,58px);line-height:1.08;letter-spacing:-.028em;margin:0 0 22px;max-width:16.4em}
+  .lede{font-size:18.5px;line-height:1.55;color:var(--ink-2);max-width:46rem;margin:0 0 28px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-block;padding:11px 20px;border-radius:999px;text-decoration:none;font-weight:500;font-size:15px;border:1px solid var(--ink);background:transparent}
   .btn.primary{background:var(--ink);color:#fff}
   .btn:hover{transform:translateY(-1px)}
 
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
-  .stats b{display:block;font-family:Fraunces,serif;font-weight:600;font-size:34px;letter-spacing:-.02em;color:var(--accent)}
-  .stats span{font-size:14px;color:var(--muted)}
-  @media (max-width:900px){.stats{grid-template-columns:repeat(2,1fr);gap:20px}}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);margin:48px 0 8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat{padding:26px 28px 26px 0}
+  .stat+.stat{border-left:1px solid var(--line);padding-left:28px}
+  .stat b{display:block;font-family:Fraunces,serif;font-weight:600;font-size:clamp(32px,3.6vw,44px);line-height:1.05;letter-spacing:-.03em;color:var(--accent)}
+  .stat b em{font-style:normal;font-weight:500;font-size:.46em;letter-spacing:0;margin-left:.15em;white-space:nowrap}
+  .stat span{display:block;margin-top:8px;font-size:14.5px;line-height:1.45;color:var(--muted);max-width:32ch}
 
   .flow{display:flex;align-items:center;gap:0;margin:0 0 36px}
   .node{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
@@ -52,7 +68,7 @@
   .wire i{position:absolute;top:-2px;width:6px;height:6px;border-radius:50%;background:var(--accent);animation:flow 2.4s linear infinite}
   .wire i:nth-child(2){animation-delay:.8s}.wire i:nth-child(3){animation-delay:1.6s}
   @keyframes flow{from{left:-6px}to{left:56px}}
-  @media (prefers-reduced-motion:reduce){.wire i{animation:none;left:25px}}
+  @media (prefers-reduced-motion:reduce){.wire i{animation:none;left:25px}.card,.btn{transition:none}.card:hover,.btn:hover{transform:none}}
 
   .sys{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
   .sx{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 22px}
@@ -129,22 +145,19 @@
   h2{font-family:Fraunces,serif;font-weight:400;font-size:32px;letter-spacing:-.015em;margin:0 0 8px}
   .sub{color:var(--muted);margin:0 0 40px}
 
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s, transform .2s}
-  .card:hover{box-shadow:0 10px 30px rgba(22,48,43,.08);transform:translateY(-2px)}
-  .card.wide{grid-column:span 2;flex-direction:row}
-  .shot{aspect-ratio:16/10;overflow:hidden;background:#e9ece6;border-bottom:1px solid var(--line)}
-  .card.wide .shot{flex:1.3;aspect-ratio:auto;border-bottom:0;border-right:1px solid var(--line)}
-  .shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
-  .body{padding:22px 24px 24px;flex:1;display:flex;flex-direction:column}
-  .card.wide .body{flex:1;justify-content:center;padding:32px}
-  .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
-  .card h3{font-family:Fraunces,serif;font-weight:600;font-size:22px;margin:6px 0 8px;letter-spacing:-.01em}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;align-items:start}
+  .card{background:var(--well);border:1px solid #d5e0d6;border-radius:18px;display:flex;flex-direction:column;padding:14px 14px 0;box-shadow:0 1px 2px rgba(22,48,43,.04);transition:box-shadow .2s, transform .2s}
+  .card:hover{box-shadow:0 12px 32px rgba(22,48,43,.08);transform:translateY(-2px)}
+  .shot{background:transparent}
+  .shot img{width:100%;height:auto;display:block;border-radius:10px;background:#fff;border:1px solid rgba(22,48,43,.06);box-shadow:0 14px 32px rgba(22,48,43,.14),0 2px 6px rgba(22,48,43,.06)}
+  .body{background:#fff;margin:16px -14px 0;padding:18px 22px 20px;border-radius:0 0 17px 17px;border-top:1px solid rgba(22,48,43,.06);display:flex;flex-direction:column;flex:1}
+  .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .card h3{font-family:Fraunces,serif;font-weight:600;font-size:22px;margin:6px 0 8px;letter-spacing:-.015em}
   .q{color:var(--ink-2);margin:0 0 14px}
   .card ul{margin:0 0 16px;padding-left:18px;color:var(--muted);font-size:14.5px}
   .card ul li{margin-bottom:4px}
-  .link{margin-top:auto;font-weight:500;font-size:14.5px;text-decoration:none;color:var(--accent)}
-  .link:hover{text-decoration:underline}
+  .link{margin-top:auto;font-weight:500;font-size:14.5px;text-decoration:none;color:var(--ink)}
+  .link:hover{color:var(--accent)}
   .note{font-size:13px;color:var(--muted);margin-top:24px}
 
   .about{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;border-top:1px solid var(--line)}
@@ -168,37 +181,63 @@
   footer{border-top:1px solid var(--line);padding:40px 0 56px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:14px}
   footer a{margin-right:18px;color:var(--ink);text-decoration:none;font-weight:500}
 
+  .term{background:var(--ink);color:#e7f0ea;border-radius:14px;padding:16px 18px 14px;margin:0 0 36px;box-shadow:0 16px 36px rgba(22,48,43,.12);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.65}
+  .term-bar{display:flex;align-items:center;gap:8px;margin-bottom:10px;color:#b7c7bf;font-size:12px;letter-spacing:.04em}
+  .term-bar i{width:8px;height:8px;border-radius:50%;background:#31584a;display:block}
+  .term-bar i:first-child{background:#c8963e}
+  .term .dots{display:flex;gap:5px}
+  .term .cmd{margin:0 0 8px;color:#f4faf6}
+  .term .prompt{color:#e2c27a;margin-right:6px}
+  .term ul{list-style:none;margin:0;padding:8px 0 0;border-top:1px solid rgba(231,240,234,.14)}
+  .term li{display:flex;align-items:baseline;gap:10px;padding:3px 0}
+  .term .ok{color:#8dceab;width:1.6em;flex:none}
+  .term .k{color:#d5e4dc}
+  .term .lead{flex:1;border-bottom:1px dotted rgba(231,240,234,.35);transform:translateY(-4px);min-width:12px}
+  .term .v{color:#f4faf6;text-align:right}
+  .term .dim{color:#9eb0a8}
+
+  @media (min-width:760px){
+    nav{white-space:nowrap}
+    header.top{align-items:baseline}
+  }
   @media (max-width:760px){
     .grid{grid-template-columns:1fr}
-    .card.wide{grid-column:auto;flex-direction:column}
-    .card.wide .shot{aspect-ratio:16/10;border-right:0;border-bottom:1px solid var(--line)}
     .about{grid-template-columns:1fr;gap:32px}
-    nav a{margin-left:14px}
-    .hero{padding:40px 0 48px}
-    section{padding:56px 0}
+    .hero{padding:28px 0 0}
+    section{padding:48px 0}
+    h1{font-size:clamp(30px,8.4vw,40px)}
+    .wrap{padding:0 20px}
+    nav{font-size:13.5px;line-height:1.45;padding-top:3px}
+    .stat{padding:18px 0}
+    .stats{grid-template-columns:1fr;margin-top:32px}
+    .stat+.stat{border-left:0;border-top:1px solid var(--line);padding-left:0}
+    .term{font-size:12.5px;padding:14px 14px 12px}
+    .term li{flex-wrap:wrap;row-gap:0}
+    .term .lead{display:none}
+    .term .v{flex:1 0 calc(100% - 2.4em);margin-left:2.4em;text-align:left}
+    .lede{font-size:16.5px}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="mark" href="#">Andrew Bushek<span>.</span></a>
-    <nav><a href="#work">Work</a><a href="#systems">Systems</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    <a class="mark" href="#">Andrew Bushek</a>
+    <nav aria-label="Page"><a href="#work">Work</a><span class="sep" aria-hidden="true">·</span><a href="#systems">Systems</a><span class="sep" aria-hidden="true">·</span><a href="#about">About</a><span class="sep" aria-hidden="true">·</span><a href="#contact">Contact</a></nav>
   </header>
 
   <div class="hero">
-    <p class="eyebrow">VP, Finance · Haystack</p>
-    <h1>Finance leader who builds <em>his own tools.</em></h1>
-    <p class="lede">I run finance, accounting, and operations as a one-person team at a PE-backed SaaS company, and I build the systems that make that possible: receivables, cash, commissions, and revenue analytics, written with Claude Code and running on BigQuery.</p>
+    <p class="eyebrow">VP of Finance · Haystack</p>
+    <h1>I run finance operations and write the software behind them, so I spend my time on strategy, not spreadsheets.</h1>
+    <p class="lede">I run finance, accounting, and operations at a PE-backed SaaS company. Receivables, cash, commissions, the close, and revenue reporting run on BigQuery and dbt, and I built them with Claude Code. Journal entries post in 2 days. Before, they took 11 to 15.</p>
     <div class="cta">
       <a class="btn primary" href="#work">See the work</a>
-      <a class="btn" href="https://andrewbushek.github.io/household-finance-demo/">Try a live demo</a>
+      <a class="btn" href="https://andrewbushek.github.io/household-finance-demo/">Try the live demo</a>
     </div>
     <div class="stats">
-      <div><b>2 days</b><span>median journal-entry posting, down from 11–15 after bringing the close in-house</span></div>
-      <div><b>1,800+</b><span>commits since April 2026, building Haystack's finance &amp; data systems</span></div>
-      <div><b>+$100K</b><span>monthly cash flow at Hearth, turned around from $1.5M of monthly burn</span></div>
-      <div><b>$23M</b><span>Series B at Hearth; led the financial modeling</span></div>
+      <div class="stat"><b>2 days</b><span>Median journal-entry posting, down from 11 to 15.</span></div>
+      <div class="stat"><b>+$100K <em>a month</em></b><span>Cash flow at Hearth, up from $1.5M of monthly burn.</span></div>
+      <div class="stat"><b>$23M</b><span>The Hearth Series B. I built the model.</span></div>
     </div>
   </div>
 
@@ -207,8 +246,8 @@
     <p class="sub">Walkthroughs of tools I've built. Every company, person, and figure shown is fictional.</p>
 
     <div class="grid">
-      <article class="card wide">
-        <div class="shot"><img src="img/cash-report.png" alt="Cash reporting dashboard with inflows, outflows, and account balances, using fictional data" loading="lazy"></div>
+      <article class="card">
+        <div class="shot"><img src="img/cash-report.png" alt="Cash report summary: cash in, cash out, net change, account balances, and a bar chart of where cash sits. Fictional data." width="1408" height="616"></div>
         <div class="body">
           <span class="tag">Treasury</span>
           <h3>Cash reporting &amp; 13-week forecast</h3>
@@ -223,7 +262,7 @@
       </article>
 
       <article class="card">
-        <div class="shot"><img src="img/ar-aging.png" alt="AR aging dashboard with invoice-age buckets, using fictional data" loading="lazy"></div>
+        <div class="shot"><img src="img/ar-aging.png" alt="AR aging summary by bucket and a stacked chart of open balance over time. Fictional data." width="1408" height="808" loading="lazy"></div>
         <div class="body">
           <span class="tag">Receivables</span>
           <h3>AR aging</h3>
@@ -233,7 +272,7 @@
       </article>
 
       <article class="card">
-        <div class="shot"><img src="img/ltv-cac.png" alt="LTV and CAC working-papers dashboard, using fictional data" loading="lazy"></div>
+        <div class="shot"><img src="img/ltv-cac.png" alt="Adjusted CAC summary: acquisition cost, LTV to CAC, in-month CAC, payback, and new customers. Fictional data." width="1168" height="508" loading="lazy"></div>
         <div class="body">
           <span class="tag">Unit economics</span>
           <h3>LTV / CAC working papers</h3>
@@ -243,7 +282,7 @@
       </article>
 
       <article class="card">
-        <div class="shot"><img src="img/planning-departments.jpg" alt="Monthly department budget grid with fictional allocations" loading="lazy"></div>
+        <div class="shot"><img src="img/planning-departments.png" alt="Engineering department budget: annual spend summary and the monthly planning grid. Fictional data." width="1424" height="728" loading="lazy"></div>
         <div class="body">
           <span class="tag">Planning · AI</span>
           <h3>Team planning with an MCP assistant</h3>
@@ -253,7 +292,7 @@
       </article>
 
       <article class="card">
-        <div class="shot"><img src="img/household-desktop.png" alt="Household finance overview with shared expenses and an income-based split, fictional household" loading="lazy"></div>
+        <div class="shot"><img src="img/household-desktop.png" alt="Household overview with shared spending, what is left in the monthly plan, and the balance between two people. Fictional household." width="1168" height="664" loading="lazy"></div>
         <div class="body">
           <span class="tag">Live demo</span>
           <h3>Household finance</h3>
@@ -268,6 +307,19 @@
   <section id="systems" style="border-top:1px solid var(--line)">
     <h2>Under the hood</h2>
     <p class="sub">What runs every day so a one-person finance team can close in two days. Every name and number below is fictional; the mechanics are real.</p>
+
+    <div class="term" role="figure" aria-label="A close command printing the month's results">
+      <div class="term-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>haystack-finance — close</span></div>
+      <p class="cmd"><span class="prompt">$</span>close --month 2026-10</p>
+      <ul>
+        <li><span class="ok">ok</span><span class="k">cash matching</span><span class="lead" aria-hidden="true"></span><span class="v">queued for approval</span></li>
+        <li><span class="ok">ok</span><span class="k">commissions</span><span class="lead" aria-hidden="true"></span><span class="v">same day</span></li>
+        <li><span class="ok">ok</span><span class="k">consolidation</span><span class="lead" aria-hidden="true"></span><span class="v">3 entities, ties to GL</span></li>
+        <li><span class="ok">ok</span><span class="k">journal entries</span><span class="lead" aria-hidden="true"></span><span class="v">96% by day 3</span></li>
+        <li><span class="ok">ok</span><span class="k">revenue</span><span class="lead" aria-hidden="true"></span><span class="v">traces to Stripe</span></li>
+        <li><span class="ok dim">→</span><span class="k">median posting</span><span class="lead" aria-hidden="true"></span><span class="v">2 days <span class="dim">was 11–15</span></span></li>
+      </ul>
+    </div>
 
     <div class="flow" aria-label="Data flows from source systems into the warehouse and out to automations">
       <div class="node"><small>Sources</small><b>QuickBooks · Stripe · HubSpot · Mercury · Gong</b></div>
@@ -410,9 +462,9 @@
   <section id="about" class="about">
     <div>
       <h2>About</h2>
-      <p>I started in investment banking at J.P. Morgan after a JD/MBA at Emory, then spent the next several years running finance at venture- and PE-backed software and fintech companies.</p>
-      <p>At Hearth I went from finance associate to VP of Finance, helped turn $1.5M of monthly burn into positive cash flow, and led the modeling for a $23M Series B. At TradeCentric I ran strategic finance for a $20M ARR business and cut commission processing from five days to same-day.</p>
-      <p>Today I'm VP of Finance at Haystack, the only person in finance, accounting, and operations. I build the tools that make that work: QuickBooks, Stripe, HubSpot, and Mercury consolidated in BigQuery across three entities, with a close that books 96% of entries by day three.</p>
+      <p>I started in investment banking at J.P. Morgan after a JD/MBA at Emory. Since then I have run finance at venture- and PE-backed software and fintech companies.</p>
+      <p>At Hearth I went from finance associate to VP of Finance. We took the company from $1.5M of monthly burn to positive cash flow, and I built the model for the $23M Series B. At TradeCentric I ran strategic finance for a $20M ARR business. I cut commission processing from five days to same-day.</p>
+      <p>At Haystack I am the whole finance function. QuickBooks, Stripe, HubSpot, and Mercury feed one BigQuery warehouse across three entities. I book 96% of entries by day three. I work in English and Spanish.</p>
     </div>
     <ol class="timeline">
       <li><div class="role">VP, Finance</div><div class="org">Haystack · 2026–present</div></li>
