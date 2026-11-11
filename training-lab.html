@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training Lab, Andrew Bushek</title>
+<meta name="description" content="Training Lab is a private training app. It turns my Garmin data into a plan I actually follow. The screens use made-up numbers.">
+<link rel="canonical" href="https://andrewbushek.github.io/training-lab.html">
+<meta property="og:url" content="https://andrewbushek.github.io/training-lab.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Training Lab, Andrew Bushek">
+<meta property="og:description" content="A private training app. It turns my Garmin data into a plan I actually follow. The screens use made-up numbers.">
+<meta property="og:image" content="https://andrewbushek.github.io/img/training-lab/dark/hero.webp">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta property="og:image:alt" content="Training Lab on a phone and a desktop, dark mode. Today's run and the week. Figures are made up.">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16302b; --ink-2:#3d524d; --muted:#6b7c77; --line:#dddcd4;
+    --bg:#f4f2ec; --card:#ffffff; --accent:#2a6848; --gold:#8d6d32;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;height:auto}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  header.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:26px 0 8px}
+  .mark{font-family:Fraunces,serif;font-weight:600;font-size:20px;text-decoration:none;letter-spacing:-.01em;flex:none;padding-top:1px}
+  nav{flex:1;min-width:0;text-align:right;font-size:14px;line-height:1.45}
+  nav a{display:inline-block;text-decoration:none;color:var(--ink-2);font-weight:500}
+  nav a:hover{color:var(--ink)}
+  nav .sep{display:inline-block;color:var(--muted);margin:0 .35em}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  .back{margin:22px 0 0}
+  .back a{font-size:14px;font-weight:500;text-decoration:none;color:var(--ink-2)}
+  .back a:hover{color:var(--accent)}
+  .project{padding:8px 0 12px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:18px 0 14px}
+  h1{font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4.7vw,58px);line-height:1.08;letter-spacing:-.028em;margin:0 0 18px}
+  h2{font-family:Fraunces,serif;font-weight:400;font-size:32px;letter-spacing:-.015em;margin:52px 0 14px}
+  .lede{font-size:18.5px;line-height:1.55;color:var(--ink-2);max-width:40rem;margin:0 0 14px}
+  .prose{max-width:40rem;color:var(--ink-2);margin:0 0 8px}
+  .note{font-size:13px;color:var(--muted);margin:8px 0 0}
+
+  .stage{position:relative}
+  .theme-input{
+    position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+    clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0;
+  }
+  .switch-bar{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:18px 0 12px;margin:0;
+  }
+  .switch{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
+  .switch label{padding:7px 16px;font-size:14px;font-weight:500;cursor:pointer}
+  .switch-bar span{font-size:13px;color:var(--muted)}
+  #tl-dark:checked ~ .switch-bar label[for="tl-dark"],
+  #tl-light:checked ~ .switch-bar label[for="tl-light"]{background:var(--ink);color:#fff}
+  #tl-dark:focus-visible ~ .switch-bar label[for="tl-dark"],
+  #tl-light:focus-visible ~ .switch-bar label[for="tl-light"]{outline:2px solid var(--accent);outline-offset:3px}
+
+  .stage .is-light{display:none}
+  #tl-light:checked ~ .hero-shot .is-dark,
+  #tl-light:checked ~ .phones .is-dark,
+  #tl-light:checked ~ .desks .is-dark,
+  #tl-light:checked ~ .meals .is-dark{display:none}
+  #tl-light:checked ~ .hero-shot .is-light,
+  #tl-light:checked ~ .phones .is-light,
+  #tl-light:checked ~ .desks .is-light,
+  #tl-light:checked ~ .meals .is-light{display:block}
+
+  figure{margin:0}
+  figcaption{margin-top:10px;font-size:13.5px;line-height:1.4;color:var(--muted)}
+  .hero-shot{margin:8px 0 4px}
+  .hero-shot img,.phones img,.desks img,.meals img{
+    width:100%;height:auto;display:block;border-radius:12px;
+    border:1px solid rgba(22,48,43,.1);
+    box-shadow:0 14px 32px rgba(22,48,43,.14),0 2px 6px rgba(22,48,43,.06);
+  }
+  .phones img,.meals img{border-radius:22px}
+
+  .phones{
+    display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+    gap:32px 18px;align-items:start;
+  }
+  .phones figure{grid-column:span 2;min-width:0}
+  .phones figure:nth-child(4){grid-column:2 / span 2}
+  .phones figure:nth-child(5){grid-column:4 / span 2}
+
+  .desks{display:grid;gap:28px}
+  .meals{
+    display:grid;grid-template-columns:repeat(2,minmax(0,300px));
+    justify-content:center;gap:28px 36px;margin-top:8px;
+  }
+  .meals figure{min-width:0}
+
+  .how{margin-top:8px}
+  .arch{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 8px;
+  }
+  .node{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
+  .node small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:4px}
+  .node b{display:block;font-weight:600;font-size:15px}
+  .node span{display:block;margin-top:6px;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
+  .node.core{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .node.core small{color:var(--gold)}
+  .node.core span{color:#d5e4dc}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  .fact{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px 18px;min-width:0}
+  .fact h3{font-family:Fraunces,serif;font-weight:600;font-size:20px;margin:0 0 8px;letter-spacing:-.015em}
+  .fact p{margin:0;color:var(--ink-2);font-size:14.5px}
+  .fact p+p{margin-top:10px}
+  .wide{grid-column:1 / -1}
+
+  footer{border-top:1px solid var(--line);padding:40px 0 56px;margin-top:56px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:14px}
+  footer a{margin-right:18px;color:var(--ink);text-decoration:none;font-weight:500}
+
+  @media (min-width:761px){
+    nav{white-space:nowrap}
+    header.top{align-items:baseline}
+  }
+  @media (max-width:760px){
+    .wrap{padding:0 20px}
+    nav{font-size:13.5px;line-height:1.45;padding-top:3px}
+    h1{font-size:clamp(30px,8.4vw,40px)}
+    h2{font-size:28px;margin-top:40px}
+    .lede{font-size:16.5px}
+    .phones{grid-template-columns:minmax(0,320px);justify-content:center;gap:28px}
+    .phones figure,
+    .phones figure:nth-child(4),
+    .phones figure:nth-child(5){grid-column:auto}
+    .meals{grid-template-columns:minmax(0,320px)}
+    .arch,.facts{grid-template-columns:1fr}
+    .switch-bar{flex-wrap:wrap}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="index.html">Andrew Bushek</a>
+    <nav aria-label="Page"><a href="index.html#work">Work</a><span class="sep" aria-hidden="true">·</span><a href="index.html#systems">Systems</a><span class="sep" aria-hidden="true">·</span><a href="index.html#about">About</a><span class="sep" aria-hidden="true">·</span><a href="index.html#contact">Contact</a></nav>
+  </header>
+
+  <article class="project">
+    <p class="back"><a href="index.html#work">← Selected work</a></p>
+    <p class="eyebrow">Personal</p>
+    <h1>Training Lab</h1>
+    <p class="lede">A private training app. I built it to turn my Garmin data into a plan I actually follow.</p>
+    <p class="prose">Sign-in is my Google account only. There is no public demo and no public repo. The numbers in the shots are made up.</p>
+
+    <div class="stage">
+      <input class="theme-input" type="radio" name="tl-theme" id="tl-dark" checked>
+      <input class="theme-input" type="radio" name="tl-theme" id="tl-light">
+      <div class="switch-bar">
+        <div class="switch">
+          <label for="tl-dark">Dark</label>
+          <label for="tl-light">Light</label>
+        </div>
+        <span>Same screens, both themes.</span>
+      </div>
+
+      <figure class="hero-shot">
+        <img class="is-dark" src="img/training-lab/dark/hero.webp" width="1920" height="1080" alt="Training Lab on a phone and a desktop, dark mode. Today's run, the week, and recovery numbers. Figures are made up." fetchpriority="high">
+        <img class="is-light" src="img/training-lab/light/hero.webp" width="1920" height="1080" alt="Training Lab on a phone and a desktop, light mode. Today's run, the week, and recovery numbers. Figures are made up.">
+      </figure>
+
+      <h2>On the phone</h2>
+      <div class="phones">
+        <figure>
+          <img class="is-dark" src="img/training-lab/dark/phone-today.webp" width="780" height="1688" alt="Training Lab on a phone, dark mode. Today's easy run and a heat-adjusted pace. Figures are made up." loading="lazy" decoding="async">
+          <img class="is-light" src="img/training-lab/light/phone-today.webp" width="780" height="1688" alt="Training Lab on a phone, light mode. Today's easy run and a heat-adjusted pace. Figures are made up." loading="lazy" decoding="async">
+          <figcaption>Today</figcaption>
+        </figure>
+        <figure>
+          <img class="is-dark" src="img/training-lab/dark/phone-plan.webp" width="780" height="1688" alt="Training Lab on a phone, dark mode. The week, with run days and lifting. Figures are made up." loading="lazy" decoding="async">
+          <img class="is-light" src="img/training-lab/light/phone-plan.webp" width="780" height="1688" alt="Training Lab on a phone, light mode. The week, with run days and lifting. Figures are made up." loading="lazy" decoding="async">
+          <figcaption>The week</figcaption>
+        </figure>
+        <figure>
+          <img class="is-dark" src="img/training-lab/dark/phone-activity.webp" width="780" height="1688" alt="Training Lab on a phone, dark mode. Kilometer splits with pace and heart rate. Figures are made up." loading="lazy" decoding="async">
+          <img class="is-light" src="img/training-lab/light/phone-activity.webp" width="780" height="1688" alt="Training Lab on a phone, light mode. Kilometer splits with pace and heart rate. Figures are made up." loading="lazy" decoding="async">
+          <figcaption>Splits</figcaption>
+        </figure>
+        <figure>
+          <img class="is-dark" src="img/training-lab/dark/phone-recovery.webp" width="780" height="1688" alt="Training Lab on a phone, dark mode. Sleep, HRV, and resting heart rate. Figures are made up." loading="lazy" decoding="async">
+          <img class="is-light" src="img/training-lab/light/phone-recovery.webp" width="780" height="1688" alt="Training Lab on a phone, light mode. Sleep, HRV, and resting heart rate. Figures are made up." loading="lazy" decoding="async">
+          <figcaption>Recovery</figcaption>
+        </figure>
+        <figure>
+          <img class="is-dark" src="img/training-lab/dark/phone-coach.webp" width="780" height="1688" alt="Training Lab on a phone, dark mode. A coach conversation about the week. Figures are made up." loading="lazy" decoding="async">
+          <img class="is-light" src="img/training-lab/light/phone-coach.webp" width="780" height="1688" alt="Training Lab on a phone, light mode. A coach conversation about the week. Figures are made up." loading="lazy" decoding="async">
+          <figcaption>Coach</figcaption>
+        </figure>
+      </div>
+
+      <h2>On the desktop</h2>
+      <div class="desks">
+        <figure>
+          <img class="is-dark" src="img/training-lab/dark/desktop-today.webp" width="1920" height="1200" alt="Training Lab on a desktop, dark mode. Today's session, the week, and recovery numbers. Figures are made up." loading="lazy" decoding="async">
+          <img class="is-light" src="img/training-lab/light/desktop-today.webp" width="1920" height="1200" alt="Training Lab on a desktop, light mode. Today's session, the week, and recovery numbers. Figures are made up." loading="lazy" decoding="async">
+          <figcaption>Today - the session, the week, and the numbers under it</figcaption>
+        </figure>
+        <figure>
+          <img class="is-dark" src="img/training-lab/dark/desktop-recovery.webp" width="1920" height="1200" alt="Training Lab on a desktop, dark mode. Sleep, HRV, body battery, and blood oxygen. Figures are made up." loading="lazy" decoding="async">
+          <img class="is-light" src="img/training-lab/light/desktop-recovery.webp" width="1920" height="1200" alt="Training Lab on a desktop, light mode. Sleep, HRV, body battery, and blood oxygen. Figures are made up." loading="lazy" decoding="async">
+          <figcaption>Recovery</figcaption>
+        </figure>
+      </div>
+
+      <h2>A meal, before it counts</h2>
+      <p class="prose">A photo goes in. An estimate comes back, with a calorie range and macros. Nothing is logged until I review the grouping, the time, and the portions.</p>
+      <div class="meals">
+        <figure>
+          <img class="is-dark" src="img/training-lab/dark/phone-meals-upload.webp" width="780" height="1688" alt="Training Lab on a phone, dark mode. A meal photo waiting for review. Figures are made up." loading="lazy" decoding="async">
+          <img class="is-light" src="img/training-lab/light/phone-meals-upload.webp" width="780" height="1688" alt="Training Lab on a phone, light mode. A meal photo waiting for review. Figures are made up." loading="lazy" decoding="async">
+          <figcaption>Photo in</figcaption>
+        </figure>
+        <figure>
+          <img class="is-dark" src="img/training-lab/dark/phone-meals-result.webp" width="780" height="1688" alt="Training Lab on a phone, dark mode. A calorie estimate with a range and macros, not yet logged. Figures are made up." loading="lazy" decoding="async">
+          <img class="is-light" src="img/training-lab/light/phone-meals-result.webp" width="780" height="1688" alt="Training Lab on a phone, light mode. A calorie estimate with a range and macros, not yet logged. Figures are made up." loading="lazy" decoding="async">
+          <figcaption>Estimate out - still not logged</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <section class="how" id="how" aria-labelledby="how-title">
+      <h2 id="how-title">How it works</h2>
+      <p class="prose">The phone app is a static site. The interesting part is what happens after a request leaves it.</p>
+
+      <div class="arch" role="group" aria-label="Request path. The browser never talks to Garmin.">
+        <div class="node"><small>Browser</small><b>Static PWA</b><span>Next.js export, installed, on Firebase Hosting. It never holds the Garmin key.</span></div>
+        <div class="node"><small>Gateway</small><b>Token check</b><span>API Gateway checks a Firebase ID token, then forwards the caller.</span></div>
+        <div class="node core"><small>API</small><b>FastAPI</b><span>Cloud Run. The token is checked again, revocation included. One Google account.</span></div>
+        <div class="node"><small>Cache</small><b>Firestore</b><span>Browser rules deny every client read. Only the service account, through the Admin SDK, touches those documents.</span></div>
+        <div class="node"><small>Source</small><b>Garmin</b><span>Official personal API. A sync is a bounded window and can resume.</span></div>
+        <div class="node"><small>Coach</small><b>Voice and meals</b><span>Gemini transcribes, then the audio is discarded. Meal photos go to the same private coach for an estimate.</span></div>
+      </div>
+      <p class="note">Stored rows are owned by the signed-in user id, not by a header the browser can invent. A failed auth check does not fall back to sample data. The process keeps one in-memory copy of the Garmin history for a few minutes, so two screens do not each re-read the whole log. Profiles and Coach conversations are their own per-user documents.</p>
+
+      <div class="facts">
+        <article class="fact">
+          <h3>Garmin sync</h3>
+          <p>The server exchanges its API key for a bearer token, treats a raw JWT body as that token, and reuses it until it is inside an hour of expiry. Keys and tokens are not written to logs.</p>
+          <p>Finished chunks are checkpointed, so a rate limit, a budget stop, or a deadline does not throw away work already stored. Activity pages are walked until a short page. Sleep, daily wellness, and HRV then come in 28-day chunks, newest first. Body battery, hydration, blood oxygen, and fitness age are optional. Detail reads (route, effort, samples) stop at six of the newest activities that still lack them. Split and lap endpoints are not called. On this connection they 404.</p>
+        </article>
+        <article class="fact">
+          <h3>What it will not invent</h3>
+          <p>Nested Garmin objects are flattened on the way in. Activity summary fields live under a summary object, sleep scores under a scores object, and body-battery days arrive as a report list. The mapper keeps a stable shape and drops empty values.</p>
+          <p>Some fields in Garmin's wider schema never arrive on this connection, and the app does not pretend they did. Sleep has an overall score, not a recovery or quality score. The load on the charts is the app's own fitness and fatigue model, even when a Garmin load series is stored. Per-kilometer splits and lap reps are not in the activity list. VO2 max and race predictions are optional and often missing. When they are missing, the screen says the number is an estimate.</p>
+        </article>
+        <article class="fact">
+          <h3>Voice coach</h3>
+          <p>A voice note is recorded in the browser. Tap the mic, talk, tap send. The audio is uploaded once and is not saved. The server holds the bytes for that request, sends them to Gemini Flash with a transcribe-only instruction, and discards the audio. Only the transcript comes back. I see that text and can send it on.</p>
+          <p>Coach is a separate private service. The API posts the question plus a structured last 14 days, not a dump of notes: distances, durations, load, sleep, wellness, VO2, one set of race predictions, the primary race date and goal, plan preferences with the free-text note removed, a short weather outlook, and reviewed meal numbers. Activity names, notes, and race names stay out. The saved conversation is what the app reloads. A proposed week is not written to the plan until I accept it.</p>
+        </article>
+        <article class="fact">
+          <h3>Meal photos</h3>
+          <p>Choosing a photo prepares it on the device: resize, flatten, strip metadata. The copy goes to private storage. Up to three photos of a suggested meal, plus a caption if I add one, go out for an estimate. The server re-encodes a bounded JPEG with no metadata and sends it to the same private coach.</p>
+          <p>The reply is a checked shape: calories, a low-to-high range, protein, carbs, fat, and a short explanation. Nothing is written to the log until I edit the numbers if I need to and tick that I reviewed the grouping, the time, and the portions. Only those reviewed numbers from the last 14 days are later shown to Coach, as numbers only, not captions or photo ids. A failed estimate leaves the draft and does not invent a number.</p>
+        </article>
+        <article class="fact">
+          <h3>VO2 max</h3>
+          <p>Garmin often does not share VO2 max on this connection, so the app estimates one. For a steady run it takes the oxygen cost of the pace from the Daniels-Gilbert running-economy curve, heat-adjusts the pace when the run has matched weather, and divides by heart-rate reserve (average heart rate against resting and max).</p>
+          <p>The number shown is the median of usable runs in the last four weeks, and only after at least three runs that are long enough. It is labelled as the app's estimate, not Garmin's. Race times from it use the same model.</p>
+        </article>
+        <article class="fact">
+          <h3>Splits</h3>
+          <p>Each kilometer is interpolated from the activity samples: cumulative distance and moving time, plus heart rate and elevation when the sample has them. A leftover piece is kept when it is at least 100 meters.</p>
+          <p>Older runs that only have a thinned pace trace get an estimated split, scaled so the pieces add up to the recorded distance. Those are marked as estimates, because a stop or a gap can move a kilometer by a few seconds.</p>
+        </article>
+        <article class="fact">
+          <h3>Readiness</h3>
+          <p>There is no recovery score on this sleep feed. Each day is read from Body Battery peak (76 or higher is good, 50 or lower is low), sleep score (80 or higher is good, under 60 is low), and last night's HRV against its 7-day average (within 3 percent or above is good, more than 10 percent below is low).</p>
+          <p>A day is low only when two of those signals are low, and good when none are low and two are good. The week eases off when at least three of the last seven days read low and at least four days have a reading. Empty days are not treated as low.</p>
+        </article>
+        <article class="fact">
+          <h3>Heat-adjusted pace</h3>
+          <p>Above 15 degrees C, pace is estimated about 0.6 percent slower per degree. Dew point above 16 degrees C adds about 0.3 percent per degree. The same rule takes heat out of a recorded run and shows a slower target for the same effort on the forecast. The forecast picks a start hour in the window and shows how much hotter the day gets later.</p>
+        </article>
+        <article class="fact wide">
+          <h3>Lifting blocks</h3>
+          <p>Two gym sessions a week is the normal week: a lower-body day, then a single-leg, upper-body, and core day. An optional third is short and light. With a race on the calendar, the four-week block is counted backward from that date so the heavier week lands just before the taper, and the easier weeks fall every four weeks before that. The last two to three weeks are a taper, with fewer sets and lighter work. Race week, the week after, and the last few days before the race drop to one light session or none. With no race, the block follows a fixed Monday calendar so a rebuild does not shuffle the week.</p>
+          <p>Lifting is never placed on a rest day, the long-run day, the day before a long or hard run, or two days in a row. The app does not know my weights. Each lift is prescribed by effort.</p>
+        </article>
+        <article class="fact wide">
+          <h3>Tests</h3>
+          <p>299 backend tests across 31 files, and 176 frontend tests across 22 files. The backend set covers sync and resume, mapping, the fields Garmin does not send, VO2, splits, readiness, heat, strength placement, meals, media, Coach context, auth, and the gateway template. The frontend set covers auth, the snapshot cache, meal photos, the Coach message flow, strength planning, theme, and weather backfill.</p>
+        </article>
+      </div>
+    </section>
+  </article>
+
+  <footer id="contact">
+    <div>
+      <a href="https://www.linkedin.com/in/andrewbushek">LinkedIn</a>
+      <a href="https://github.com/andrewbushek">GitHub</a>
+    </div>
+    <div>Seattle · Denver</div>
+  </footer>
+</div>
+</body>
+</html>
